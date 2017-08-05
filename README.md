@@ -1,6 +1,6 @@
 # PHP App Static Image
 
-[![StyleCI](https://styleci.io/repos/00000000/shield?style=flat)](https://styleci.io/repos/00000000)
+[![StyleCI](https://styleci.io/repos/99412510/shield?style=flat)](https://styleci.io/repos/99412510)
 [![Build Status](https://travis-ci.org/greg-md/php-app-static-image.svg)](https://travis-ci.org/greg-md/php-app-static-image)
 [![Total Downloads](https://poser.pugx.org/greg-md/php-app-static-image/d/total.svg)](https://packagist.org/packages/greg-md/php-app-static-image)
 [![Latest Stable Version](https://poser.pugx.org/greg-md/php-app-static-image/v/stable.svg)](https://packagist.org/packages/greg-md/php-app-static-image)
