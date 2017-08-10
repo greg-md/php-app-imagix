@@ -3,7 +3,7 @@
 return [
     'sourcePath' => __DIR__ . '/../public',
 
-    'destinationPath' => __DIR__ . '/../public/static',
+    'destinationPath' => __DIR__ . '/../public/imagix',
 
-    'uriPath' => '/static',
+    'baseUri' => '/imagix',
 ];

@@ -1,13 +1,13 @@
-# PHP App Static Image
+# PHP App Imagix
 
 [![StyleCI](https://styleci.io/repos/99412510/shield?style=flat)](https://styleci.io/repos/99412510)
-[![Build Status](https://travis-ci.org/greg-md/php-app-static-image.svg)](https://travis-ci.org/greg-md/php-app-static-image)
-[![Total Downloads](https://poser.pugx.org/greg-md/php-app-static-image/d/total.svg)](https://packagist.org/packages/greg-md/php-app-static-image)
-[![Latest Stable Version](https://poser.pugx.org/greg-md/php-app-static-image/v/stable.svg)](https://packagist.org/packages/greg-md/php-app-static-image)
-[![Latest Unstable Version](https://poser.pugx.org/greg-md/php-app-static-image/v/unstable.svg)](https://packagist.org/packages/greg-md/php-app-static-image)
-[![License](https://poser.pugx.org/greg-md/php-app-static-image/license.svg)](https://packagist.org/packages/greg-md/php-app-static-image)
+[![Build Status](https://travis-ci.org/greg-md/php-app-imagix.svg)](https://travis-ci.org/greg-md/php-app-imagix)
+[![Total Downloads](https://poser.pugx.org/greg-md/php-app-imagix/d/total.svg)](https://packagist.org/packages/greg-md/php-app-imagix)
+[![Latest Stable Version](https://poser.pugx.org/greg-md/php-app-imagix/v/stable.svg)](https://packagist.org/packages/greg-md/php-app-imagix)
+[![Latest Unstable Version](https://poser.pugx.org/greg-md/php-app-imagix/v/unstable.svg)](https://packagist.org/packages/greg-md/php-app-imagix)
+[![License](https://poser.pugx.org/greg-md/php-app-imagix/license.svg)](https://packagist.org/packages/greg-md/php-app-imagix)
 
-Integration of [PHP Static Image](https://github.com/greg-md/php-static-image) in [Greg PHP Application](https://github.com/greg-md/php-app).
+Integration of [PHP Imagix](https://github.com/greg-md/php-imagix) in [Greg PHP Application](https://github.com/greg-md/php-app).
 
 # Table of Contents
 
@@ -23,22 +23,30 @@ Integration of [PHP Static Image](https://github.com/greg-md/php-static-image) i
 
 # Installation
 
-`composer require greg-md/php-app-static-image`
+Download package:
+
+`composer require greg-md/php-app-imagix`
+
+Install package:
+
+`./greg install greg-imagix`
 
 # Configuration
 
 **Nginx**
 
-```nginx
-# Static Image
-location ~* @.+\.(png|jpe?g|gif)$ {
-    if (!-f \$document_root\$uri) {
-        rewrite ^/static(/.+) /image.php?static=\$1 last;
+```nginxconfig
+# Imagix
+location ~* ^/imagix/.+ {
+    # If images doesn't exists, send to PHP to create it.
+    if (!-f $document_root$uri) {
+        rewrite .+ /imagix.php last;
     }
 
     expires max;
-    add_header Cache-Control \"public\";
-    add_header Vary \"Accept-Encoding\";
+    add_header Pragma public;
+    add_header Cache-Control "public";
+    add_header Vary "Accept-Encoding";
 }
 ```
 

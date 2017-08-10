@@ -1,6 +1,6 @@
 <phpunit colors="true">
     <testsuites>
-        <testsuite name="PHP App Static Image">
+        <testsuite name="PHP App Imagix">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>

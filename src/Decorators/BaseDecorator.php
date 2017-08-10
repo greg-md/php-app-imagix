@@ -1,26 +1,26 @@
 <?php
 
-namespace Greg\AppStaticImage\Decorators;
+namespace Greg\AppImagix\Decorators;
 
-use Greg\StaticImage\ImageDecoratorStrategy;
+use Greg\Imagix\ImagixDecoratorStrategy;
 use Greg\Support\Str;
 
-class BaseDecorator implements ImageDecoratorStrategy
+class BaseDecorator implements ImagixDecoratorStrategy
 {
-    private $uriPath;
+    private $baseUri;
 
-    public function __construct(string $uriPath)
+    public function __construct(string $baseUri)
     {
-        $this->uriPath = $uriPath;
+        $this->baseUri = $baseUri;
     }
 
-    public function output($url)
+    public function output($url): string
     {
-        return $this->uriPath . $url;
+        return $this->baseUri . $url;
     }
 
-    public function input($url)
+    public function input($url): string
     {
-        return Str::shift($url, $this->uriPath);
+        return Str::shift($url, $this->baseUri);
     }
 }

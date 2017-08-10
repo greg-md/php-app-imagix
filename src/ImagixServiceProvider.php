@@ -1,31 +1,31 @@
 <?php
 
-namespace Greg\AppStaticImage;
+namespace Greg\AppImagix;
 
+use Greg\AppImagix\Events\LoadImagixEvent;
 use Greg\AppInstaller\Application;
 use Greg\AppInstaller\Events\ConfigAddEvent;
 use Greg\AppInstaller\Events\ConfigRemoveEvent;
 use Greg\AppInstaller\Events\PublicAddEvent;
 use Greg\AppInstaller\Events\PublicRemoveEvent;
-use Greg\AppStaticImage\Decorators\BaseDecorator;
-use Greg\AppStaticImage\Events\LoadStaticImageManagerEvent;
+use Greg\AppImagix\Decorators\BaseDecorator;
 use Greg\Framework\ServiceProvider;
-use Greg\StaticImage\StaticImageManager;
+use Greg\Imagix\Imagix;
 use Intervention\Image\ImageManager;
 
-class StaticImageServiceProvider implements ServiceProvider
+class ImagixServiceProvider implements ServiceProvider
 {
-    private const CONFIG_NAME = 'staticImage';
+    private const CONFIG_NAME = 'imagix';
 
-    private const STATIC_NAME = 'static';
+    private const PATH_NAME = 'imagix';
 
-    private const IMAGE_NAME = 'image.php';
+    private const SCRIPT_NAME = 'imagix.php';
 
     private $app;
 
     public function name(): string
     {
-        return 'greg-static-image';
+        return 'greg-imagix';
     }
 
     public function boot(Application $app)
@@ -35,15 +35,15 @@ class StaticImageServiceProvider implements ServiceProvider
 
     public function bootHttpKernel(Application $app)
     {
-        $app->inject(StaticImageManager::class, function () use ($app) {
-            $manager = new StaticImageManager(
+        $app->inject(Imagix::class, function () use ($app) {
+            $manager = new Imagix(
                 new ImageManager(),
                 $this->config('sourcePath'),
                 $this->config('destinationPath'),
-                new BaseDecorator($this->config('uriPath'))
+                new BaseDecorator($this->config('baseUri'))
             );
 
-            $app->event(new LoadStaticImageManagerEvent($manager));
+            $app->event(new LoadImagixEvent($manager));
 
             return $manager;
         });
@@ -53,18 +53,18 @@ class StaticImageServiceProvider implements ServiceProvider
     {
         $app->event(new ConfigAddEvent(__DIR__ . '/../config/config.php', self::CONFIG_NAME));
 
-        $app->event(new PublicAddEvent(__DIR__ . '/../public/static', self::STATIC_NAME));
+        $app->event(new PublicAddEvent(__DIR__ . '/../public/imagix', self::PATH_NAME));
 
-        $app->event(new PublicAddEvent(__DIR__ . '/../public/image.php', self::IMAGE_NAME));
+        $app->event(new PublicAddEvent(__DIR__ . '/../public/imagix.php', self::SCRIPT_NAME));
     }
 
     public function uninstall(Application $app)
     {
         $app->event(new ConfigRemoveEvent(self::CONFIG_NAME));
 
-        $app->event(new PublicRemoveEvent(self::STATIC_NAME));
+        $app->event(new PublicRemoveEvent(self::PATH_NAME));
 
-        $app->event(new PublicRemoveEvent(self::IMAGE_NAME));
+        $app->event(new PublicRemoveEvent(self::SCRIPT_NAME));
     }
 
     private function config($name)
