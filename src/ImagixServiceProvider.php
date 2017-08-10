@@ -38,9 +38,9 @@ class ImagixServiceProvider implements ServiceProvider
         $app->inject(Imagix::class, function () use ($app) {
             $manager = new Imagix(
                 new ImageManager(),
-                $this->config('sourcePath'),
-                $this->config('destinationPath'),
-                new BaseDecorator($this->config('baseUri'))
+                $this->config('source_path'),
+                $this->config('destination_path'),
+                new BaseDecorator($this->config('base_uri'))
             );
 
             $app->event(new LoadImagixEvent($manager));
