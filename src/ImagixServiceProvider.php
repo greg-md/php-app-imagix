@@ -2,13 +2,13 @@
 
 namespace Greg\AppImagix;
 
+use Greg\AppImagix\Decorators\BaseDecorator;
 use Greg\AppImagix\Events\LoadImagixEvent;
 use Greg\AppInstaller\Application;
 use Greg\AppInstaller\Events\ConfigAddEvent;
 use Greg\AppInstaller\Events\ConfigRemoveEvent;
 use Greg\AppInstaller\Events\PublicAddEvent;
 use Greg\AppInstaller\Events\PublicRemoveEvent;
-use Greg\AppImagix\Decorators\BaseDecorator;
 use Greg\Framework\ServiceProvider;
 use Greg\Imagix\Imagix;
 use Intervention\Image\ImageManager;
