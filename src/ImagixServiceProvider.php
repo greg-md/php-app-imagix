@@ -36,16 +36,16 @@ class ImagixServiceProvider implements ServiceProvider
     public function bootHttpKernel(Application $app)
     {
         $app->inject(Imagix::class, function () use ($app) {
-            $manager = new Imagix(
+            $imagix = new Imagix(
                 new ImageManager(),
                 $this->config('source_path'),
                 $this->config('destination_path'),
                 new BaseDecorator($this->config('base_uri'))
             );
 
-            $app->event(new LoadImagixEvent($manager));
+            $app->event(new LoadImagixEvent($imagix));
 
-            return $manager;
+            return $imagix;
         });
     }
 
