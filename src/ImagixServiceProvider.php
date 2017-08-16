@@ -31,10 +31,7 @@ class ImagixServiceProvider implements ServiceProvider
     public function boot(Application $app)
     {
         $this->app = $app;
-    }
 
-    public function bootHttpKernel(Application $app)
-    {
         $app->inject(Imagix::class, function () use ($app) {
             $imagix = new Imagix(
                 new ImageManager(),
