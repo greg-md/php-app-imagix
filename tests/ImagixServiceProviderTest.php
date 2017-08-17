@@ -61,8 +61,6 @@ class ImagixServiceProviderTest extends TestCase
 
         $serviceProvider->boot($app);
 
-        $serviceProvider->bootHttpKernel($app);
-
         /** @var Imagix $imagix */
         $imagix = $app->get(Imagix::class);
 
